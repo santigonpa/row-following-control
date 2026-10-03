@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<sdf version="1.8">
+  <model name="tree">
+
+    <!-- Tronco -->
+    <link name="trunk">
+      <pose>0 0 1.0 0 0 0</pose>
+
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.12</radius>
+            <length>2.0</length>
+          </cylinder>
+        </geometry>
+      </visual>
+
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.12</radius>
+            <length>2.0</length>
+          </cylinder>
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- Copa -->
+    <link name="canopy">
+      <pose>0 0 2.2 0 0 0</pose>
+
+      <visual name="visual">
+        <geometry>
+          <sphere>
+            <radius>0.65</radius>
+          </sphere>
+        </geometry>
+      </visual>
+
+      <collision name="collision">
+        <geometry>
+          <sphere>
+            <radius>0.65</radius>
+          </sphere>
+        </geometry>
+      </collision>
+    </link>
+
+  </model>
+</sdf>

@@ -1,0 +1,192 @@
+<?xml version="1.0" ?>
+
+<sdf version="1.8" xmlns:gz="https://gazebosim.org/schema">
+
+  <world name="test_world">
+
+    <!-- Fisica -->
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <!-- Gravedad -->
+    <gravity>0 0 -9.81</gravity>
+
+    <!-- Suelo -->
+    <model name="ground">
+
+      <static>true</static>
+
+      <link name="link">
+
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+
+        <visual name="visual">
+
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+
+          <material>
+            <ambient>0.25 0.18 0.10 1</ambient>
+            <diffuse>0.35 0.25 0.15 1</diffuse>
+          </material>
+
+        </visual>
+
+      </link>
+
+    </model>
+
+    <!-- Luz -->
+    <light
+      name="sun"
+      type="directional">
+
+      <cast_shadows>true</cast_shadows>
+
+      <pose>0 0 10 0 0 0</pose>
+
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+
+      <direction>-0.5 0.5 -1</direction>
+
+    </light>
+
+    <!-- Mantener los plugins GUI predeterminados de Gazebo -->
+    <gz:policies>
+      <include_gui_default_plugins>true</include_gui_default_plugins>
+    </gz:policies>
+
+    <!-- Configuracion personalizada de la escena -->
+    <gui fullscreen="0">
+
+      <plugin filename="MinimalScene" name="3D View">
+
+        <gz-gui>
+          <title>3D View</title>
+          <property type="bool" key="showTitleBar">false</property>
+          <property type="string" key="state">docked</property>
+        </gz-gui>
+
+        <engine>ogre2</engine>
+        <scene>scene</scene>
+
+        <ambient_light>0.7 0.7 0.7</ambient_light>
+
+        <background_color>0.55 0.75 1.0</background_color>
+
+        <camera_pose>8 0 8 0 0.6 3.14</camera_pose>
+
+        <camera_clip>
+          <near>0.25</near>
+          <far>25000</far>
+        </camera_clip>
+
+      </plugin>
+
+      <plugin filename="GzSceneManager" name="Scene Manager">
+
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+
+      </plugin>
+
+      <plugin filename="InteractiveViewControl" name="Interactive view control">
+
+        <gz-gui>
+          <property key="resizable" type="bool">false</property>
+          <property key="width" type="double">5</property>
+          <property key="height" type="double">5</property>
+          <property key="state" type="string">floating</property>
+          <property key="showTitleBar" type="bool">false</property>
+        </gz-gui>
+
+      </plugin>
+
+<plugin filename="WorldControl" name="World control">
+  <ignition-gui>
+    <title>World control</title>
+    <property type="bool" key="showTitleBar">false</property>
+    <property type="bool" key="resizable">false</property>
+    <property type="double" key="height">72</property>
+    <property type="double" key="width">121</property>
+    <property type="double" key="z">1</property>
+    <property type="string" key="state">floating</property>
+    <anchors target="3D View">
+      <line own="left" target="left"/>
+      <line own="bottom" target="bottom"/>
+    </anchors>
+  </ignition-gui>
+
+  <play_pause>true</play_pause>
+  <step>true</step>
+  <start_paused>true</start_paused>
+  <service>/world/test_world/control</service>
+  <stats_topic>/world/test_world/stats</stats_topic>
+</plugin>
+
+<plugin filename="EntityTree" name="Entity tree">
+</plugin>
+
+<plugin filename="ComponentInspector" name="Component inspector">
+</plugin>
+
+<plugin filename="TransformControl" name="Transform control">
+</plugin>
+
+    </gui>
+
+    <!-- Robot -->
+    <include>
+      <uri>model://robot</uri>
+      <name>row_robot</name>
+      <pose>0 0 0.3 0 0 0</pose>
+    </include>
+
+    <!-- Fila de arboles -->
+    <include>
+      <uri>model://tree</uri>
+      <name>tree_1</name>
+      <pose>5 2 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://tree</uri>
+      <name>tree_2</name>
+      <pose>10 2 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://tree</uri>
+      <name>tree_3</name>
+      <pose>15 2 0 0 0 0</pose>
+    </include>
+
+    <include>
+      <uri>model://tree</uri>
+      <name>tree_4</name>
+      <pose>20 2 0 0 0 0</pose>
+    </include>
+
+  </world>
+
+</sdf>
